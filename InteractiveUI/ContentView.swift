@@ -17,6 +17,9 @@ struct ContentView: View {
    
     @State private var presentAlert = false
 //This sets up the possibility for an alert, and that upon opening, there is none (false). When binding value is set to true, the alert will show.
+    
+    @State private var date = Date()
+//This sets up the possibility for date entry, and that upon opening the app, the default value is blank.
 
     var body: some View {
         VStack{
@@ -50,6 +53,14 @@ struct ContentView: View {
                 Text("Please check your name on the welcome screen and make sure it is what you'd like to be called by our app.")
             })
 //binds alert value to true when the "submit name" button is pressed and prompts an alert with the label & message listed here. No actions assigned to the alert, it disappears after pressing ok
+            
+            DatePicker(
+                    "What is your birthday?",
+                    selection: $date,
+                    displayedComponents: [.date]
+                )
+//selection binds to date variable. display components creates date picker with only date shown (no time)
+           
         }
 //end VStack
         .padding()
