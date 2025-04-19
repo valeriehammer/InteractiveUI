@@ -8,16 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var name = ""
+//var name = "" is a *property* because it is a variable specific to the struct. It is set to an empty string to prompt that nothing is entered upon the app opening.
+//@State is a *property wrapper*. It tells Swift to keep track of the variable and update the interface as it changes.
+    @State private var textTitle = "What is your name?"
     var body: some View {
         VStack{
-            Text("What is your name?")
+            Text(textTitle)
                 .font(.title)
-            TextField("Type your name here...", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
+            TextField("Type your name here...", text: $name)
+//$ means that there is 2 way binding. Keeps track of changes and updates property name.
                 .multilineTextAlignment(.center)
                 .font(.title)
                 .border(Color.gray, width: 1)
             Button("Submit Name") {
-                /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
+                textTitle = "Welcome, \(name)!"
+//  No dollar sign needed for name property here because the value isn't changing, no binding needed.
+//  Changes textTitle to read Welcome with name that is entered
+                name = ""
+//  Resets name property state to being blank after button is clicked.
             }
             .font(.title2)
             .buttonStyle(.borderedProminent)
